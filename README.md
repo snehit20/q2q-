@@ -1,126 +1,125 @@
 ❓ Quora Duplicate Question Detection
 
-This project builds a machine learning model to identify whether two questions from Quora are semantically duplicate or not.
-Instead of relying only on deep learning, this approach focuses on strong feature engineering + classical ML, which is efficient, interpretable, and deployment-friendly.
+A machine learning–based NLP project to identify whether two questions asked on Quora are semantically duplicate.
 
-📌 Problem Statement
+This project focuses on strong feature engineering + classical machine learning, making it lightweight, interpretable, and deployment-friendly 🚀
 
-Given two questions:
 
-Are these two questions asking the same thing?
+📌 Overview
 
-The model predicts:
+Given a pair of questions, the model predicts:
 
 1 → Duplicate questions
 
 0 → Non-duplicate questions
 
-🧠 Approach Overview
+The pipeline combines hand-crafted text similarity features with Bag of Words vectorization, followed by a Random Forest classifier 🌲
 
-The pipeline follows these steps:
 
-Data Cleaning & Sampling
+🔁 Workflow
 
-Removed null values and duplicates
+Data cleaning and sampling
 
-Randomly sampled 50,000 rows for faster experimentation
-
-Feature Engineering (Core Strength of this Project)
-
-Extracted multiple text similarity features
-
-Combined them with Bag of Words (CountVectorizer)
-
-Model Training
-
-Trained a RandomForestClassifier
-
-Evaluated using accuracy on a held-out test set
-
-🧩 Feature Engineered Columns
-1️⃣ Basic Text Similarity Features
-Feature Name	Description
-common_words_count	Number of common words between both questions
-total_word_count	Total unique words in both questions
-word_share	Ratio of common words to total words
-
-These features capture surface-level overlap between questions.
-
-2️⃣ Length-Based Features
-Feature Name	Description
-abs_len_diff	Absolute difference in number of words
-mean_len	Average length of both questions
-longest_substr_ratio	Length of the longest common substring normalized by question length
-
-These help detect structural similarity between questions.
-
-3️⃣ Token-Based Features (with Stopwords)
-Feature Name	Description
-q1_stopwords	Stopword count in Question 1
-q2_stopwords	Stopword count in Question 2
-common_stopwords	Common stopwords between questions
-common_tokens	Common non-stopword tokens
-token_ratio	Token overlap ratio
-
-These features reduce noise and focus on meaningful tokens.
-
-4️⃣ Fuzzy Matching Features
-
-Powered by FuzzyWuzzy, these features capture approximate string similarity:
-
-Feature Name	Description
-fuzz_ratio	Overall similarity score
-fuzz_partial_ratio	Partial match similarity
-token_sort_ratio	Similarity after sorting tokens
-token_set_ratio	Similarity based on unique token sets
-
-These are especially useful when wording differs but intent is the same.
-
-5️⃣ Bag of Words (CountVectorizer)
-
-CountVectorizer(max_features=3000)
-
-Applied to both questions
-
-Converted text into numerical vectors
-
-Concatenated with engineered features
-
-This provides a statistical representation of language.
-
-🤖 Model Used
-
-Algorithm: Random Forest Classifier
-
-Reason:
-
-Handles non-linear feature interactions
-
-Works well with mixed numerical features
-
-Robust to noise
-
-📊 Results
-
-The model achieves strong accuracy using only:
+Text preprocessing
 
 Feature engineering
 
-Classical ML
+Vectorization
 
-No deep learning
+Model training and evaluation
 
-This makes it:
 
-Fast to train
+🧩 Feature Engineering
 
-Easy to deploy
+The core strength of this project lies in its carefully engineered features, designed to capture semantic and structural similarity between question pairs.
 
-Easy to interpret
+🔹 Word Overlap Features
+
+These features measure direct lexical similarity between questions.
+
+common_words_count – Number of common words
+
+total_word_count – Total unique words across both questions
+
+word_share – Ratio of common words to total words
+
+📏 Length-Based Features
+
+These capture structural similarity and sentence balance.
+
+abs_len_diff – Absolute difference in question lengths
+
+mean_len – Average length of both questions
+
+longest_substr_ratio – Normalized length of the longest common substring
+
+
+🧠 Token-Based Features (Stopword Aware)
+
+These focus on meaningful tokens while reducing noise.
+
+q1_stopwords – Stopword count in Question 1
+
+q2_stopwords – Stopword count in Question 2
+
+common_stopwords – Shared stopwords
+
+common_tokens – Shared non-stopword tokens
+
+token_ratio – Token overlap ratio
+
+
+🔍 Fuzzy Matching Features
+
+Approximate string matching to capture similarity beyond exact word matches.
+
+fuzz_ratio
+
+fuzz_partial_ratio
+
+token_sort_ratio
+
+token_set_ratio
+
+
+🧾 Bag of Words Representation
+
+CountVectorizer (max_features = 3000)
+
+Applied to both questions
+
+Combined with engineered features to create the final feature set
+
+
+🤖 Model
+
+Algorithm: Random Forest Classifier 🌲
+
+Why Random Forest?
+
+Handles non-linear feature interactions
+
+Works well with engineered numerical features
+
+Robust and easy to interpret
+
+
+📊 Results
+
+The model achieves strong classification performance using:
+
+Classical NLP techniques
+
+Extensive feature engineering
+
+No deep learning models
+
+This makes the solution fast, efficient, and scalable ⚡
+
 
 🛠️ Tech Stack
 
-Python
+Python 🐍
 
 Pandas, NumPy
 
@@ -130,25 +129,18 @@ FuzzyWuzzy
 
 Scikit-learn
 
-Matplotlib / Seaborn (EDA)
 
-🚀 Future Improvements
+🚀 Future Enhancements
 
-Replace BoW with TF-IDF
+Replace Bag of Words with TF-IDF
 
-Try XGBoost / LightGBM
+Experiment with XGBoost / LightGBM
 
 Add word embeddings (Word2Vec / GloVe)
 
-Compare with Siamese Networks or BERT
+Compare with Siamese Networks or Transformer-based models
 
-📌 Key Takeaway
 
-This project shows that good feature engineering can rival complex models.
-It’s ideal for:
+🏁 Conclusion
 
-NLP fundamentals
-
-Interview discussions
-
-Internship-ready portfolios
+This project demonstrates that strong feature engineering can rival complex deep learning models and serves as a solid baseline for NLP similarity tasks 🧠✨
