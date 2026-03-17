@@ -1,146 +1,246 @@
-❓ Quora Duplicate Question Detection
+# ❓ Quora Duplicate Question Detection
 
-A machine learning–based NLP project to identify whether two questions asked on Quora are semantically duplicate.
+A **Machine Learning–based Natural Language Processing (NLP) project** that identifies whether two questions asked on Quora are **semantically duplicate**.
 
-This project focuses on strong feature engineering + classical machine learning, making it lightweight, interpretable, and deployment-friendly 🚀
+This project emphasizes **strong feature engineering combined with classical machine learning**, making the solution **lightweight, interpretable, and deployment-friendly**.
 
+---
 
-📌 Overview
+# 1. 📌 Project Overview
 
-Given a pair of questions, the model predicts:
+On platforms like Quora, many users ask the **same question in different wording**. Detecting such duplicates helps:
 
-1 → Duplicate questions
+• Improve search results
+• Reduce redundant content
+• Organize knowledge more effectively
 
-0 → Non-duplicate questions
+This system predicts whether **two questions convey the same meaning**.
 
-The pipeline combines hand-crafted text similarity features with Bag of Words vectorization, followed by a Random Forest classifier 🌲
+### Prediction Labels
 
+• **1 → Duplicate Questions**
+• **0 → Non-Duplicate Questions**
 
-🔁 Workflow
+The model combines:
 
-Data cleaning and sampling
+1. Hand-crafted text similarity features
+2. Bag of Words vectorization
+3. A **Random Forest classifier**
 
-Text preprocessing
+---
 
-Feature engineering
+# 2. 🔁 Workflow
 
-Vectorization
+The overall machine learning pipeline consists of the following steps:
 
-Model training and evaluation
+1. Data cleaning and preprocessing
+2. Data sampling and preparation
+3. Feature engineering
+4. Text vectorization
+5. Model training
+6. Model evaluation and prediction
 
+---
 
-🧩 Feature Engineering
+# 3. 🧩 Feature Engineering
 
-The core strength of this project lies in its carefully engineered features, designed to capture semantic and structural similarity between question pairs.
+The core strength of this project lies in **carefully engineered features** designed to capture **semantic and structural similarity** between question pairs.
 
-🔹 Word Overlap Features
+The features are divided into four major groups.
 
-These features measure direct lexical similarity between questions.
+---
 
-common_words_count – Number of common words
+# 4. 🔹 Word Overlap Features
 
-total_word_count – Total unique words across both questions
+These features measure **direct lexical similarity** between the two questions.
 
-word_share – Ratio of common words to total words
+1. **common_words_count**
+   Number of words that appear in both questions.
 
-📏 Length-Based Features
+2. **total_word_count**
+   Total unique words across both questions.
 
-These capture structural similarity and sentence balance.
+3. **word_share**
+   Ratio of common words to total words.
 
-abs_len_diff – Absolute difference in question lengths
+These features capture how much vocabulary is shared between the questions.
 
-mean_len – Average length of both questions
+---
 
-longest_substr_ratio – Normalized length of the longest common substring
+# 5. 📏 Length-Based Features
 
+These features capture **structural similarity** between question pairs.
 
-🧠 Token-Based Features (Stopword Aware)
+1. **abs_len_diff**
+   Absolute difference between lengths of the two questions.
 
-These focus on meaningful tokens while reducing noise.
+2. **mean_len**
+   Average length of both questions.
 
-q1_stopwords – Stopword count in Question 1
+3. **longest_substr_ratio**
+   Normalized length of the longest common substring.
 
-q2_stopwords – Stopword count in Question 2
+These help detect cases where questions have similar structure but slightly different wording.
 
-common_stopwords – Shared stopwords
+---
 
-common_tokens – Shared non-stopword tokens
+# 6. 🧠 Token-Based Features (Stopword Aware)
 
-token_ratio – Token overlap ratio
+These features focus on **meaningful tokens while reducing noise from common stopwords**.
 
+1. **q1_stopwords**
+   Number of stopwords in Question 1.
 
-🔍 Fuzzy Matching Features
+2. **q2_stopwords**
+   Number of stopwords in Question 2.
 
-Approximate string matching to capture similarity beyond exact word matches.
+3. **common_stopwords**
+   Number of shared stopwords.
 
-fuzz_ratio
+4. **common_tokens**
+   Number of shared non-stopword tokens.
 
-fuzz_partial_ratio
+5. **token_ratio**
+   Ratio of shared tokens to total tokens.
 
-token_sort_ratio
+This improves semantic comparison by emphasizing important words.
 
-token_set_ratio
+---
 
+# 7. 🔍 Fuzzy Matching Features
 
-🧾 Bag of Words Representation
+Fuzzy matching allows **approximate string comparison**, capturing similarity beyond exact word matches.
+
+The following metrics are used:
+
+1. **fuzz_ratio**
+2. **fuzz_partial_ratio**
+3. **token_sort_ratio**
+4. **token_set_ratio**
+
+These features help detect duplicate questions even when **word order or phrasing differs**.
+
+---
+
+# 8. 🧾 Bag of Words Representation
+
+To convert text into numerical format, the project uses **Bag of Words vectorization**.
+
+### Configuration
 
 CountVectorizer (max_features = 3000)
 
-Applied to both questions
+### Process
 
-Combined with engineered features to create the final feature set
+1. Vectorize Question 1 text
+2. Vectorize Question 2 text
+3. Combine vector features with engineered features
+4. Create the final feature matrix
 
+This hybrid approach combines **text representation with handcrafted similarity features**.
 
-🤖 Model
+---
 
-Algorithm: Random Forest Classifier 🌲
+# 9. 🤖 Machine Learning Model
 
-Why Random Forest?
+The project uses a **Random Forest Classifier**.
 
-Handles non-linear feature interactions
+### Why Random Forest?
 
-Works well with engineered numerical features
+1. Handles **non-linear relationships between features**
+2. Works well with **mixed feature types**
+3. Robust against overfitting
+4. Provides strong baseline performance
 
-Robust and easy to interpret
+Random Forest is particularly effective when working with **feature-engineered datasets**.
 
+---
 
-📊 Results
+# 10. 📊 Model Results
 
-The model achieves strong classification performance using:
+The model demonstrates strong classification performance using:
 
-Classical NLP techniques
+• Classical NLP techniques
+• Extensive feature engineering
+• No deep learning models
 
-Extensive feature engineering
+This makes the solution:
 
-No deep learning models
+• **Fast**
+• **Efficient**
+• **Scalable**
 
-This makes the solution fast, efficient, and scalable ⚡
+---
 
+# 11. 🛠️ Tech Stack
 
-🛠️ Tech Stack
+The following tools and libraries were used:
 
-Python 🐍
+1. **Python**
+2. **Pandas**
+3. **NumPy**
+4. **NLTK**
+5. **FuzzyWuzzy**
+6. **Scikit-learn**
 
-Pandas, NumPy
+---
 
-NLTK
+# 12. 📁 Project Structure
 
-FuzzyWuzzy
+Quora-Duplicate-Question-Detection
+│
+├── dataset.csv
+├── quora_duplicate_detection.ipynb
+│
+├── README.md
+│
+└── requirements.txt
 
-Scikit-learn
+---
 
+# 13. 🚀 Future Enhancements
 
-🚀 Future Enhancements
+Possible improvements for this project include:
 
-Replace Bag of Words with TF-IDF
+1. Replace **Bag of Words with TF-IDF**
+2. Experiment with **XGBoost or LightGBM**
+3. Use **word embeddings (Word2Vec or GloVe)**
+4. Implement **Siamese Neural Networks**
+5. Compare results with **Transformer-based models such as BERT**
 
-Experiment with XGBoost / LightGBM
+These improvements could increase the model's semantic understanding and prediction accuracy.
 
-Add word embeddings (Word2Vec / GloVe)
+---
 
-Compare with Siamese Networks or Transformer-based models
+# 14. 🧠 Applications
 
+Duplicate question detection can be used in:
 
-🏁 Conclusion
+• Question–Answer platforms (Quora, StackOverflow)
+• Search engines
+• Chatbots
+• Knowledge base management systems
 
-This project demonstrates that strong feature engineering can rival complex deep learning models and serves as a solid baseline for NLP similarity tasks 🧠✨
+It helps improve **information retrieval and reduce redundant queries**.
+
+---
+
+# 15. 🏁 Conclusion
+
+This project demonstrates that **strong feature engineering combined with classical machine learning** can achieve powerful results for NLP similarity tasks.
+
+It serves as a **solid baseline approach** before moving to more complex deep learning architectures.
+
+---
+
+# 16. 👨‍💻 Author
+
+**Snehit Singh**
+B.Tech – Artificial Intelligence & Machine Learning
+
+Interests:
+
+• Machine Learning
+• Natural Language Processing
+• AI Systems
+• Applied AI Research
